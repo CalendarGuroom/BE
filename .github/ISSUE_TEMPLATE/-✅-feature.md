@@ -3,7 +3,7 @@ name: " ✅ FEATURE"
 about: Feature 작업 사항을 입력해주세요.
 title: "[FEAT]"
 labels: ''
-assignees: haeun1107
+assignees: ''
 
 ---
 
