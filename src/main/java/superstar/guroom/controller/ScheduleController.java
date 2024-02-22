@@ -10,7 +10,7 @@ import superstar.guroom.service.ScheduleService;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/api/schedule")
+@RequestMapping("/schedule")
 public class ScheduleController {
     private final ScheduleService scheduleService;
 
