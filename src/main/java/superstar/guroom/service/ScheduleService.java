@@ -6,6 +6,8 @@ import superstar.guroom.dto.ScheduleDTO;
 import superstar.guroom.entity.BasicSchedule;
 import superstar.guroom.repository.ScheduleRepository;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
@@ -27,5 +29,31 @@ public class ScheduleService {
                 .build();
         scheduleRepository.save(basicSchedule);
         return basicSchedule;
+    }
+
+    public BasicSchedule detailSchedule(Long scheduleId) {
+        Optional<BasicSchedule> optionalBasicSchedule = scheduleRepository.findById(scheduleId);
+
+        // 해당 scheduleId로 일정을 찾을 수 없는 경우
+        if (optionalBasicSchedule.isEmpty()) {
+            System.out.println("error");
+            // 예외 처리 로직
+        }
+
+        BasicSchedule basicSchedule = optionalBasicSchedule.get();
+        return BasicSchedule.builder()
+                .scheduleId(basicSchedule.getScheduleId())
+                .scheduleType(basicSchedule.getScheduleType())
+                .scheduleTitle(basicSchedule.getScheduleTitle())
+                .scheduleAllTime(basicSchedule.getScheduleAllTime())
+                .scheduleStartDate(basicSchedule.getScheduleStartDate())
+                .scheduleStartTime(basicSchedule.getScheduleStartTime())
+                .scheduleEndDate(basicSchedule.getScheduleEndDate())
+                .scheduleEndTime(basicSchedule.getScheduleEndTime())
+                .scheduleAlarm(basicSchedule.getScheduleAlarm())
+                .schedulePlace(basicSchedule.getSchedulePlace())
+                .scheduleColor(basicSchedule.getScheduleColor())
+                .scheduleComplete(basicSchedule.getScheduleComplete())
+                .build();
     }
 }
