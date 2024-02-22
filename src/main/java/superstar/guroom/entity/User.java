@@ -1,4 +1,4 @@
-package entity;
+package superstar.guroom.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
