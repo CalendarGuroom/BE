@@ -68,17 +68,17 @@ public class ScheduleService {
         BasicSchedule basicSchedule = optionalBasicSchedule.get();
         BasicSchedule updatedSchedule = BasicSchedule.builder()
                 .scheduleId(basicSchedule.getScheduleId())
-                .scheduleType(scheduleDTO.getScheduleType())
-                .scheduleTitle(scheduleDTO.getScheduleTitle())
-                .scheduleAllTime(scheduleDTO.getScheduleAllTime())
-                .scheduleStartDate(scheduleDTO.getScheduleStartDate())
-                .scheduleStartTime(scheduleDTO.getScheduleStartTime())
-                .scheduleEndDate(scheduleDTO.getScheduleEndDate())
-                .scheduleEndTime(scheduleDTO.getScheduleEndTime())
-                .scheduleAlarm(scheduleDTO.getScheduleAlarm())
-                .schedulePlace(scheduleDTO.getSchedulePlace())
-                .scheduleColor(scheduleDTO.getScheduleColor())
-                .scheduleComplete(scheduleDTO.getScheduleComplete())
+                .scheduleType(scheduleDTO.getScheduleType() != null ? scheduleDTO.getScheduleType() : basicSchedule.getScheduleType())
+                .scheduleTitle(scheduleDTO.getScheduleTitle() != null ? scheduleDTO.getScheduleTitle() : basicSchedule.getScheduleTitle())
+                .scheduleAllTime(scheduleDTO.getScheduleAllTime() != null ? scheduleDTO.getScheduleAllTime() : basicSchedule.getScheduleAllTime())
+                .scheduleStartDate(scheduleDTO.getScheduleStartDate() != null ? scheduleDTO.getScheduleStartDate() : basicSchedule.getScheduleStartDate())
+                .scheduleStartTime(scheduleDTO.getScheduleStartTime() != null ? scheduleDTO.getScheduleStartTime() : basicSchedule.getScheduleStartTime())
+                .scheduleEndDate(scheduleDTO.getScheduleEndDate() != null ? scheduleDTO.getScheduleEndDate() : basicSchedule.getScheduleEndDate())
+                .scheduleEndTime(scheduleDTO.getScheduleEndTime() != null ? scheduleDTO.getScheduleEndTime() : basicSchedule.getScheduleEndTime())
+                .scheduleAlarm(scheduleDTO.getScheduleAlarm() != null ? scheduleDTO.getScheduleAlarm() : basicSchedule.getScheduleAlarm())
+                .schedulePlace(scheduleDTO.getSchedulePlace() != null ? scheduleDTO.getSchedulePlace() : basicSchedule.getSchedulePlace())
+                .scheduleColor(scheduleDTO.getScheduleColor() != null ? scheduleDTO.getScheduleColor() : basicSchedule.getScheduleColor())
+                .scheduleComplete(scheduleDTO.getScheduleComplete() != null ? scheduleDTO.getScheduleComplete() : basicSchedule.getScheduleComplete())
                 .build();
 
         scheduleRepository.save(updatedSchedule);
