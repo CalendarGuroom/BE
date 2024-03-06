@@ -30,4 +30,5 @@ public class ScheduleDTO {
     private String scheduleColor;
 
     private Boolean scheduleComplete;
+
 }

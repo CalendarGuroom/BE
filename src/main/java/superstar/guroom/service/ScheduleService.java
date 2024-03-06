@@ -27,6 +27,7 @@ public class ScheduleService {
                 .scheduleColor(scheduleDTO.getScheduleColor())
                 .scheduleComplete(scheduleDTO.getScheduleComplete())
                 .build();
+
         scheduleRepository.save(basicSchedule);
         return basicSchedule;
     }
@@ -36,8 +37,8 @@ public class ScheduleService {
 
         // 해당 scheduleId로 일정을 찾을 수 없는 경우
         if (optionalBasicSchedule.isEmpty()) {
-            System.out.println("error");
             // 예외 처리 로직
+            throw new RuntimeException("일정을 찾을 수 없습니다. scheduleId : " + scheduleId);
         }
 
         BasicSchedule basicSchedule = optionalBasicSchedule.get();
@@ -55,5 +56,32 @@ public class ScheduleService {
                 .scheduleColor(basicSchedule.getScheduleColor())
                 .scheduleComplete(basicSchedule.getScheduleComplete())
                 .build();
+    }
+
+    public BasicSchedule updateSchedule(Long scheduleId, ScheduleDTO scheduleDTO) {
+        Optional<BasicSchedule> optionalBasicSchedule = scheduleRepository.findById(scheduleId);
+        if (optionalBasicSchedule.isEmpty()) {
+            // 예외 처리 로직
+            throw new RuntimeException("일정을 찾을 수 없습니다. scheduleId : " + scheduleId);
+        }
+
+        BasicSchedule basicSchedule = optionalBasicSchedule.get();
+        BasicSchedule updatedSchedule = BasicSchedule.builder()
+                .scheduleId(basicSchedule.getScheduleId())
+                .scheduleType(scheduleDTO.getScheduleType())
+                .scheduleTitle(scheduleDTO.getScheduleTitle())
+                .scheduleAllTime(scheduleDTO.getScheduleAllTime())
+                .scheduleStartDate(scheduleDTO.getScheduleStartDate())
+                .scheduleStartTime(scheduleDTO.getScheduleStartTime())
+                .scheduleEndDate(scheduleDTO.getScheduleEndDate())
+                .scheduleEndTime(scheduleDTO.getScheduleEndTime())
+                .scheduleAlarm(scheduleDTO.getScheduleAlarm())
+                .schedulePlace(scheduleDTO.getSchedulePlace())
+                .scheduleColor(scheduleDTO.getScheduleColor())
+                .scheduleComplete(scheduleDTO.getScheduleComplete())
+                .build();
+
+        scheduleRepository.save(updatedSchedule);
+        return updatedSchedule;
     }
 }
