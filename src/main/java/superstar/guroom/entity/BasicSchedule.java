@@ -6,7 +6,8 @@ import lombok.*;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "basic_schedule")
 public class BasicSchedule {
     @Id
@@ -46,19 +47,48 @@ public class BasicSchedule {
     @Column
     private Boolean scheduleComplete;
 
-    // 생성자 추가
-    public BasicSchedule(Long scheduleId, String scheduleType, String scheduleTitle, Boolean scheduleAllTime, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate, String scheduleEndTime, Boolean scheduleAlarm, String schedulePlace, String scheduleColor, Boolean scheduleComplete) {
-        this.scheduleId = scheduleId;
+    public void updateScheduleType(String scheduleType) {
         this.scheduleType = scheduleType;
+    }
+
+    public void updateScheduleTitle(String scheduleTitle) {
         this.scheduleTitle = scheduleTitle;
+    }
+
+    public void updateScheduleAllTime(Boolean scheduleAllTime) {
         this.scheduleAllTime = scheduleAllTime;
+    }
+
+    public void updateScheduleStartDate(String scheduleStartDate) {
         this.scheduleStartDate = scheduleStartDate;
+    }
+
+    public void updateScheduleStartTime(String scheduleStartTime) {
         this.scheduleStartTime = scheduleStartTime;
+    }
+
+    public void updateScheduleEndDate(String scheduleEndDate) {
         this.scheduleEndDate = scheduleEndDate;
+    }
+
+    public void updateScheduleEndTime(String scheduleEndTime) {
         this.scheduleEndTime = scheduleEndTime;
+    }
+
+    public void updateScheduleAlarm(Boolean scheduleAlarm) {
         this.scheduleAlarm = scheduleAlarm;
+    }
+
+    public void updateSchedulePlace(String schedulePlace) {
         this.schedulePlace = schedulePlace;
+    }
+
+    public void updateScheduleColor(String scheduleColor) {
         this.scheduleColor = scheduleColor;
+    }
+
+    public void updateScheduleComplete(Boolean scheduleComplete) {
         this.scheduleComplete = scheduleComplete;
     }
+
 }

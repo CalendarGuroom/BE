@@ -60,28 +60,50 @@ public class ScheduleService {
 
     public BasicSchedule updateSchedule(Long scheduleId, ScheduleDTO scheduleDTO) {
         Optional<BasicSchedule> optionalBasicSchedule = scheduleRepository.findById(scheduleId);
+
         if (optionalBasicSchedule.isEmpty()) {
             // 예외 처리 로직
             throw new RuntimeException("일정을 찾을 수 없습니다. scheduleId : " + scheduleId);
         }
 
         BasicSchedule basicSchedule = optionalBasicSchedule.get();
-        BasicSchedule updatedSchedule = BasicSchedule.builder()
-                .scheduleId(basicSchedule.getScheduleId())
-                .scheduleType(scheduleDTO.getScheduleType() != null ? scheduleDTO.getScheduleType() : basicSchedule.getScheduleType())
-                .scheduleTitle(scheduleDTO.getScheduleTitle() != null ? scheduleDTO.getScheduleTitle() : basicSchedule.getScheduleTitle())
-                .scheduleAllTime(scheduleDTO.getScheduleAllTime() != null ? scheduleDTO.getScheduleAllTime() : basicSchedule.getScheduleAllTime())
-                .scheduleStartDate(scheduleDTO.getScheduleStartDate() != null ? scheduleDTO.getScheduleStartDate() : basicSchedule.getScheduleStartDate())
-                .scheduleStartTime(scheduleDTO.getScheduleStartTime() != null ? scheduleDTO.getScheduleStartTime() : basicSchedule.getScheduleStartTime())
-                .scheduleEndDate(scheduleDTO.getScheduleEndDate() != null ? scheduleDTO.getScheduleEndDate() : basicSchedule.getScheduleEndDate())
-                .scheduleEndTime(scheduleDTO.getScheduleEndTime() != null ? scheduleDTO.getScheduleEndTime() : basicSchedule.getScheduleEndTime())
-                .scheduleAlarm(scheduleDTO.getScheduleAlarm() != null ? scheduleDTO.getScheduleAlarm() : basicSchedule.getScheduleAlarm())
-                .schedulePlace(scheduleDTO.getSchedulePlace() != null ? scheduleDTO.getSchedulePlace() : basicSchedule.getSchedulePlace())
-                .scheduleColor(scheduleDTO.getScheduleColor() != null ? scheduleDTO.getScheduleColor() : basicSchedule.getScheduleColor())
-                .scheduleComplete(scheduleDTO.getScheduleComplete() != null ? scheduleDTO.getScheduleComplete() : basicSchedule.getScheduleComplete())
-                .build();
 
-        scheduleRepository.save(updatedSchedule);
-        return updatedSchedule;
+        // 각 필드 업데이트
+        if (scheduleDTO.getScheduleType() != null) {
+            basicSchedule.updateScheduleType(scheduleDTO.getScheduleType());
+        }
+        if (scheduleDTO.getScheduleTitle() != null) {
+            basicSchedule.updateScheduleTitle(scheduleDTO.getScheduleTitle());
+        }
+        if (scheduleDTO.getScheduleAllTime() != null) {
+            basicSchedule.updateScheduleAllTime(scheduleDTO.getScheduleAllTime());
+        }
+        if (scheduleDTO.getScheduleStartDate() != null) {
+            basicSchedule.updateScheduleStartDate(scheduleDTO.getScheduleStartDate());
+        }
+        if (scheduleDTO.getScheduleStartTime() != null) {
+            basicSchedule.updateScheduleStartTime(scheduleDTO.getScheduleStartTime());
+        }
+        if (scheduleDTO.getScheduleEndDate() != null) {
+            basicSchedule.updateScheduleEndDate(scheduleDTO.getScheduleEndDate());
+        }
+        if (scheduleDTO.getScheduleEndTime() != null) {
+            basicSchedule.updateScheduleEndTime(scheduleDTO.getScheduleEndTime());
+        }
+        if (scheduleDTO.getScheduleAlarm() != null) {
+            basicSchedule.updateScheduleAlarm(scheduleDTO.getScheduleAlarm());
+        }
+        if (scheduleDTO.getSchedulePlace() != null) {
+            basicSchedule.updateSchedulePlace(scheduleDTO.getSchedulePlace());
+        }
+        if (scheduleDTO.getScheduleColor() != null) {
+            basicSchedule.updateScheduleColor(scheduleDTO.getScheduleColor());
+        }
+        if (scheduleDTO.getScheduleComplete() != null) {
+            basicSchedule.updateScheduleComplete(scheduleDTO.getScheduleComplete());
+        }
+
+        scheduleRepository.save(basicSchedule);
+        return basicSchedule;
     }
 }
