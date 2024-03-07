@@ -47,6 +47,7 @@ public class BasicSchedule {
     @Column
     private Boolean scheduleComplete;
 
+    // 수정 메서드
     public void updateScheduleType(String scheduleType) {
         this.scheduleType = scheduleType;
     }
