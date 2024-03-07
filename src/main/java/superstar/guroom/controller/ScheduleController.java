@@ -26,4 +26,9 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleService.detailSchedule(scheduleId));
     }
 
+    // 일정 수정하기
+    @PatchMapping("/update/{scheduleId}")
+    public ResponseEntity<?> updateSchedule(@PathVariable("scheduleId") Long scheduleId, @RequestBody ScheduleDTO scheduleDTO) {
+        return ResponseEntity.ok(scheduleService.updateSchedule(scheduleId, scheduleDTO));
+    }
 }

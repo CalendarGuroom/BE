@@ -27,6 +27,7 @@ public class ScheduleService {
                 .scheduleColor(scheduleDTO.getScheduleColor())
                 .scheduleComplete(scheduleDTO.getScheduleComplete())
                 .build();
+
         scheduleRepository.save(basicSchedule);
         return basicSchedule;
     }
@@ -36,8 +37,8 @@ public class ScheduleService {
 
         // 해당 scheduleId로 일정을 찾을 수 없는 경우
         if (optionalBasicSchedule.isEmpty()) {
-            System.out.println("error");
             // 예외 처리 로직
+            throw new RuntimeException("일정을 찾을 수 없습니다. scheduleId : " + scheduleId);
         }
 
         BasicSchedule basicSchedule = optionalBasicSchedule.get();
@@ -55,5 +56,54 @@ public class ScheduleService {
                 .scheduleColor(basicSchedule.getScheduleColor())
                 .scheduleComplete(basicSchedule.getScheduleComplete())
                 .build();
+    }
+
+    public BasicSchedule updateSchedule(Long scheduleId, ScheduleDTO scheduleDTO) {
+        Optional<BasicSchedule> optionalBasicSchedule = scheduleRepository.findById(scheduleId);
+
+        if (optionalBasicSchedule.isEmpty()) {
+            // 예외 처리 로직
+            throw new RuntimeException("일정을 찾을 수 없습니다. scheduleId : " + scheduleId);
+        } else {
+            BasicSchedule basicSchedule = optionalBasicSchedule.get();
+
+            // 각 필드 업데이트
+            if (scheduleDTO.getScheduleType() != null) {
+                basicSchedule.updateScheduleType(scheduleDTO.getScheduleType());
+            }
+            if (scheduleDTO.getScheduleTitle() != null) {
+                basicSchedule.updateScheduleTitle(scheduleDTO.getScheduleTitle());
+            }
+            if (scheduleDTO.getScheduleAllTime() != null) {
+                basicSchedule.updateScheduleAllTime(scheduleDTO.getScheduleAllTime());
+            }
+            if (scheduleDTO.getScheduleStartDate() != null) {
+                basicSchedule.updateScheduleStartDate(scheduleDTO.getScheduleStartDate());
+            }
+            if (scheduleDTO.getScheduleStartTime() != null) {
+                basicSchedule.updateScheduleStartTime(scheduleDTO.getScheduleStartTime());
+            }
+            if (scheduleDTO.getScheduleEndDate() != null) {
+                basicSchedule.updateScheduleEndDate(scheduleDTO.getScheduleEndDate());
+            }
+            if (scheduleDTO.getScheduleEndTime() != null) {
+                basicSchedule.updateScheduleEndTime(scheduleDTO.getScheduleEndTime());
+            }
+            if (scheduleDTO.getScheduleAlarm() != null) {
+                basicSchedule.updateScheduleAlarm(scheduleDTO.getScheduleAlarm());
+            }
+            if (scheduleDTO.getSchedulePlace() != null) {
+                basicSchedule.updateSchedulePlace(scheduleDTO.getSchedulePlace());
+            }
+            if (scheduleDTO.getScheduleColor() != null) {
+                basicSchedule.updateScheduleColor(scheduleDTO.getScheduleColor());
+            }
+            if (scheduleDTO.getScheduleComplete() != null) {
+                basicSchedule.updateScheduleComplete(scheduleDTO.getScheduleComplete());
+            }
+
+            scheduleRepository.save(basicSchedule);
+            return basicSchedule;
+        }
     }
 }
