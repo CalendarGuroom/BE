@@ -106,4 +106,17 @@ public class ScheduleService {
             return basicSchedule;
         }
     }
+
+    public void deleteSchedule(Long scheduleId) {
+        Optional<BasicSchedule> optionalBasicSchedule = scheduleRepository.findById(scheduleId);
+
+        // 해당 scheduleId로 일정을 찾을 수 없는 경우
+        if (optionalBasicSchedule.isEmpty()) {
+            // 예외 처리 로직
+            throw new RuntimeException("일정을 찾을 수 없습니다. scheduleId : " + scheduleId);
+        } else {
+            BasicSchedule basicSchedule = optionalBasicSchedule.get();
+            scheduleRepository.delete(basicSchedule);
+        }
+    }
 }
